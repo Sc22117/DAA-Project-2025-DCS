@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Upload File</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='upload_style.css') }}" />
+</head>
+<body>
+  <div class="upload-container">
+    <div class="upload-header">
+      <h2>Upload Your File</h2>
+      <p>Select a file to upload below or drag and drop it here</p>
+    </div>
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" class="upload-form" id="upload-form">
+      
+      <div class="drag-drop-area" id="drag-drop-area">
+        <p>Drag & Drop your file here</p>
+        <input type="file" name="file" id="file-input" required hidden />
+        <button type="button" id="select-file-btn" class="upload-btn" style="margin-top: 20px;">Select File</button>
+      </div>
+
+      <button type="submit" class="upload-btn" style="margin-top: 30px;">Upload</button>
+    </form>
+  </div>
+
+  <script>
+    const dragDropArea = document.getElementById('drag-drop-area');
+    const fileInput = document.getElementById('file-input');
+    const selectFileBtn = document.getElementById('select-file-btn');
+
+    // Click button opens file picker
+    selectFileBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    // When a file is selected by input
+    fileInput.addEventListener('change', () => {
+      if(fileInput.files.length > 0) {
+        dragDropArea.querySelector('p').textContent = `Selected file: ${fileInput.files[0].name}`;
+      }
+    });
+
+    // Drag events
+    dragDropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dragDropArea.classList.add('dragover');
+    });
+
+    dragDropArea.addEventListener('dragleave', () => {
+      dragDropArea.classList.remove('dragover');
+    });
+
+    dragDropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dragDropArea.classList.remove('dragover');
+      if(e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files; // Assign dropped files to input
+        dragDropArea.querySelector('p').textContent = `Selected file: ${fileInput.files[0].name}`;
+      }
+    });
+  </script>
+</body>
+</html>

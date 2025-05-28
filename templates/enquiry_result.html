@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enquiry Result</title>
+</head>
+<body>
+  <h2>Schedule:</h2>
+  <ul>
+    {% for entry in schedule %}
+      <li>{{ entry }}</li>
+    {% endfor %}
+  </ul>
+  <a href="/dashboard">Back</a>
+</body>
+</html>
