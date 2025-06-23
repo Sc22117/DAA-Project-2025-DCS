@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Timetable | Classroom Scheduler</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='timetable_style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="timetable-container">
+    <div class="timetable-header">
+      <h2>Upload Your Timetable</h2>
+      <p>Please select an Excel (.xlsx) file to upload</p>
+    </div>
+    
+    <form class="upload-form" method="POST" enctype="multipart/form-data">
+      <div class="file-upload-wrapper">
+        <label class="file-upload-label" for="file-upload">
+          <i class="fas fa-file-excel"></i>
+          <span>Choose a file or drag it here</span>
+          <small>Only .xlsx files are accepted</small>
+        </label>
+        <input id="file-upload" class="file-upload-input" type="file" name="file" accept=".xlsx" required>
+      </div>
+      
+      <button type="submit" class="upload-btn">
+        <i class="fas fa-upload"></i> Upload Timetable
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // Display selected filename
+    document.getElementById('file-upload').addEventListener('change', function(e) {
+      const fileName = e.target.files[0]?.name || 'No file selected';
+      document.querySelector('.file-upload-label span').textContent = fileName;
+    });
+    
+    // Drag and drop functionality
+    const fileUploadLabel = document.querySelector('.file-upload-label');
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+      fileUploadLabel.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+      fileUploadLabel.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      fileUploadLabel.style.backgroundColor = 'rgba(102, 126, 234, 0.2)';
+      fileUploadLabel.style.borderColor = '#764ba2';
+    }
+    
+    function unhighlight(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      fileUploadLabel.style.backgroundColor = 'rgba(102, 126, 234, 0.05)';
+      fileUploadLabel.style.borderColor = '#667eea';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Timetable</title>
+    <link rel="stylesheet" href="{{ url_for('serve_static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>✅ Timetable Generated Successfully!</h2>
+        <p>You can now download your final Excel report.</p>
+        <a href="{{ url_for('download_file') }}" class="btn">Download Report</a>
+        <br><br>
+        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>
