@@ -1,3 +1,4 @@
+# Import libraries for Firebase, data, and utilities
 import firebase_admin
 from firebase_admin import credentials, db
 import pandas as pd
