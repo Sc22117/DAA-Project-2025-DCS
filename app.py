@@ -4,7 +4,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore, db as firebase_db
 
- # Only initialize the app if it hasn't been initialized already
+ # It only initialize the app if it hasn't been initialized already
 if not firebase_admin._apps:
     cred = credentials.Certificate("DCS(Firebase Key).json")
     firebase_admin.initialize_app(cred, {
@@ -30,7 +30,6 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ---------- Routes ----------
-
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
